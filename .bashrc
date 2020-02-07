@@ -23,6 +23,9 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+#for vcxsrv display locally
+export DISPLAY=172.18.192.1:0
+
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
@@ -51,9 +54,12 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
+alias ls='lsd'
+
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias lt='ls --tree'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -68,3 +74,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+stackrun() {
+	stack build
+	echo "Executing $1"
+	stack exec $1
+}
